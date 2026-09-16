@@ -5,8 +5,6 @@ services:
     name: n8n-iconicskills1
     image:
       url: docker.io/n8nio/n8n:latest
-    
-    healthCheckPath: /healthz
 
     envVars:
       - key: N8N_PORT
@@ -19,28 +17,14 @@ services:
         value: "0.0.0.0"
 
       - key: N8N_ENCRYPTION_KEY
-        generateValue: true  # This is fine for fresh start
+        generateValue: true
 
       - key: DB_TYPE
         value: postgresdb
-      
-      - key: DB_POSTGRESDB_HOST
-        value: aws-0-ap-northeast-1.pooler.supabase.com
-        
-      - key: DB_POSTGRESDB_PORT
-        value: "5432"
-        
-      - key: DB_POSTGRESDB_DATABASE
-        value: postgres
-        
-      - key: DB_POSTGRESDB_USER
-        value: postgres.mfqtfzsbbddyxwdzzxsc
-        
-      - key: DB_POSTGRESDB_PASSWORD
+
+      # Use Neon connection string instead
+      - key: DATABASE_URL
         sync: false  # Set in Render dashboard
 
-      - key: DB_POSTGRESDB_SSL_ENABLED
-        value: "true"
-        
-      - key: WEBHOOK_URL
+      - key: N8N_WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
