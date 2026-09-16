@@ -33,7 +33,7 @@ services:
 
       # Use the Supabase Pooler host (e.g., ://supabase.com)
       - key: DB_POSTGRESDB_HOST
-        sync: aws-0-ap-northeast-1.pooler.supabase.com
+        value: aws-0-ap-northeast-1.pooler.supabase.com
       
       # Use the Supabase Pooler host (e.g., ://supabase.com)
       #- key: DB_POSTGRESDB_HOST
