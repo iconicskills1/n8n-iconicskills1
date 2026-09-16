@@ -5,39 +5,27 @@
 services:
   - type: web
     plan: free
-    # This is the runtime for services that pull a prebuilt Docker image
     runtime: image
-    # You can give the service any name
-    name: n8n-iconicskills1
+    name: n8n-service
     image:
-      # Pulls the n8n image tagged as latest from Docker Hub
       url: docker.io/n8nio/n8n:latest
 
-    # All environment variables defined below are required!
     envVars:
-      # Generates a base64-encoded key for encrypting credentials in n8n
+      # Tell Render to route public internet traffic to n8n's internal port
       - key: PORT
         value: "5678"
 
-      # Do not modify this value after it's generated!
+      # Generates a base64-encoded key for encrypting credentials in n8n
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
 
       # Database Configuration for Supabase
       - key: DB_TYPE
         value: postgresdb
-        
-      # Force n8n to resolve hostnames via IPv4 first
-      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-        value: "true"
-
-      # Use the Supabase Pooler host (e.g., ://supabase.com)
-      - key: DB_POSTGRESDB_HOST
-        value: aws-0-ap-northeast-1.pooler.supabase.com
       
-      # Use the Supabase Pooler host (e.g., ://supabase.com)
-      #- key: DB_POSTGRESDB_HOST
-      #  sync: false
+      # Hardcoded Supabase Pooler host
+      - key: DB_POSTGRESDB_HOST
+        value: ://supabase.com
         
       # The Supabase connection pooler port (always 6543)
       - key: DB_POSTGRESDB_PORT
