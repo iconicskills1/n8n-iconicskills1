@@ -25,7 +25,7 @@ services:
         value: postgresdb
       
       - key: DB_POSTGRESDB_HOST
-        value: db.mfqtfzsbbddyxwdzzxsc.supabase.co
+        value: aws-0-ap-northeast-1.pooler.supabase.com
         
       - key: DB_POSTGRESDB_PORT
         value: "5432"
@@ -34,7 +34,7 @@ services:
         value: postgres
         
       - key: DB_POSTGRESDB_USER
-        value: postgres
+        value: postgres.mfqtfzsbbddyxwdzzxsc
         
       - key: DB_POSTGRESDB_PASSWORD
         sync: false  # Set in Render dashboard
