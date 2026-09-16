@@ -24,24 +24,27 @@ services:
       - key: DB_TYPE
         value: postgresdb
       
-      # Get this from Supabase Dashboard → Database → Connection Pooling
+      # Direct connection host (check if this resolves to IPv6)
       - key: DB_POSTGRESDB_HOST
-        value: aws-0-us-east-1.pooler.supabase.com  # Replace with your actual host
+        value: aws-0-ap-northeast-1.pooler.supabase.com
         
       - key: DB_POSTGRESDB_PORT
-        value: "5432"  # Session mode port
+        value: "5432"
         
       - key: DB_POSTGRESDB_DATABASE
         value: postgres
         
       - key: DB_POSTGRESDB_USER
-        value: postgres.mfqtfzsbbddyxwdzzxsc  # Set to: postgres.xxxxx (your pooled user)
+        value: postgres.mfqtfzsbbddyxwdzzxsc
         
       - key: DB_POSTGRESDB_PASSWORD
-        value: supabasepowerman1984  # Set to your database password
+        value: supabasepowerman1984
 
       - key: DB_POSTGRESDB_SSL_ENABLED
         value: "true"
+        
+      - key: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
         
       - key: WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
