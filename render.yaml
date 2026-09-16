@@ -16,6 +16,9 @@ services:
     # All environment variables defined below are required!
     envVars:
       # Generates a base64-encoded key for encrypting credentials in n8n
+       - key: PORT
+        value: "5678"
+
       # Do not modify this value after it's generated!
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
