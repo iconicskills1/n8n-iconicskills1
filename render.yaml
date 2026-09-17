@@ -11,7 +11,7 @@ services:
     envVars:
       # CRITICAL: Fixes BOTH DNS IPv4 lookup AND Memory Limit (OOM Crash)
       - key: NODE_OPTIONS
-        value: "--dns-result-order=ipv4first --max-old-space-size=256 --max-semi-space-size=1"
+        value: "--dns-result-order=ipv4first --max-old-space-size=280 --max-semi-space-size=1"
 
       # Disable background telemetry that can hang startup
       - key: N8N_DIAGNOSTICS_ENABLED
@@ -63,6 +63,9 @@ services:
       - key: DB_POSTGRESDB_PASSWORD
         value: npg_CvH1FRtMSg8V
 
+      - key: DB_POSTGRESDB_CONNECTION_TIMEOUT
+        value: "60000"
+      
       # SSL Settings required by Neon
       - key: DB_POSTGRESDB_SSL_ENABLED
         value: "true"
@@ -71,7 +74,7 @@ services:
         value: "false"
 
       - key: DB_POSTGRESDB_POOL_SIZE
-        value: "1"
+        value: "2"
 
       - key: WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
