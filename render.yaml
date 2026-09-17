@@ -43,7 +43,7 @@ services:
         value: postgresdb
 
       - key: DB_POSTGRESDB_HOST
-        value: ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech
+        value: ep-solitary-base-b4q36a3r.c-6.us-east-2.aws.neon.tech
         
       - key: DB_POSTGRESDB_PORT
         value: "5432"
