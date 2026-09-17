@@ -9,14 +9,22 @@ services:
     healthCheckPath: /healthz
 
     envVars:
-      # FIX 1: Limit Node memory usage to 384MB so it doesn't exceed Render's 512MB limit
+      # CRITICAL: Fixes BOTH DNS IPv4 lookup AND Memory Limit (OOM Crash)
       - key: NODE_OPTIONS
-        value: "--max-old-space-size=384"
+        value: "--dns-result-order=ipv4first --max-old-space-size=384"
 
-      # FIX 2: Run execution in main process to save 100MB+ RAM
+      # Save RAM by running execution in main process
       - key: EXECUTIONS_PROCESS
         value: "main"
 
+      # Disable background telemetry that can hang startup
+      - key: N8N_DIAGNOSTICS_ENABLED
+        value: "false"
+
+      - key: N8N_PERSONALIZATION_ENABLED
+        value: "false"
+
+      # Port configuration for Render
       - key: N8N_PORT
         value: "5678"
       
@@ -26,15 +34,16 @@ services:
       - key: N8N_LISTEN_ADDRESS
         value: "0.0.0.0"
 
+      # Encryption Key (Fixed static string)
       - key: N8N_ENCRYPTION_KEY
         value: "n8n_iconic_skills_secret_key_2024_secure"
 
-      # Database Configuration for Neon
+      # --- Database Configuration (Mapped from your Neon Parameters) ---
       - key: DB_TYPE
         value: postgresdb
 
       - key: DB_POSTGRESDB_HOST
-        value: ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech'
+        value: ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech
         
       - key: DB_POSTGRESDB_PORT
         value: "5432"
@@ -45,9 +54,11 @@ services:
       - key: DB_POSTGRESDB_USER
         value: neondb_owner
 
+      # ⚠️ Make sure this contains your FULL Neon password (including characters after npg_)
       - key: DB_POSTGRESDB_PASSWORD
-        value: pg_CvH1FRtMSg8V
+        value: npg_CvH1FRtMSg8V
 
+      # SSL Settings required by Neon
       - key: DB_POSTGRESDB_SSL_ENABLED
         value: "true"
 
