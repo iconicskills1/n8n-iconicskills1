@@ -19,12 +19,16 @@ services:
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
 
+      # ONLY use DB_TYPE and DATABASE_URL
       - key: DB_TYPE
         value: postgresdb
 
-      # Use Neon connection string instead
       - key: DATABASE_URL
         sync: false  # Set in Render dashboard
 
       - key: N8N_WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
+
+      # Optional: Disable SSL rejection if needed
+      - key: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
