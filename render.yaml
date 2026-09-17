@@ -13,12 +13,6 @@ services:
       - key: NODE_OPTIONS
         value: "--dns-result-order=ipv4first --max-old-space-size=350"
 
-      # Save RAM by running execution in main process
-     # - key: EXECUTIONS_PROCESS
-      #  value: "main"
-
-      # Restrict DB connection pool size to save memory
-        
       # Disable background telemetry that can hang startup
       - key: N8N_DIAGNOSTICS_ENABLED
         value: "false"
@@ -26,6 +20,15 @@ services:
       - key: N8N_PERSONALIZATION_ENABLED
         value: "false"
 
+      - key: N8N_RUNNERS_TASK_TIMEOUT
+        value: "300"
+
+      - key: N8N_COMPRESSION_NODE_MAX_DECOMPRESSED_SIZE_BYTES
+        value: "2147483648"
+
+      - key: N8N_COMPRESSION_NODE_MAX_ZIP_ENTRIES
+        value: "5000"
+        
       # Port configuration for Render
       - key: N8N_PORT
         value: "5678"
@@ -69,9 +72,6 @@ services:
 
       - key: DB_POSTGRESDB_POOL_SIZE
         value: "3"
-
-      - key: DB_POSTGRESDB_CONNECTION_TIMEOUT
-        value: "30000"
 
       - key: WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
