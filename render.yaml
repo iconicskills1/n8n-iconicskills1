@@ -6,40 +6,53 @@ services:
     image:
       url: docker.io/n8nio/n8n:latest
 
+    healthCheckPath: /healthz
+
     envVars:
+      # FIX 1: Limit Node memory usage to 384MB so it doesn't exceed Render's 512MB limit
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=384"
+
+      # FIX 2: Run execution in main process to save 100MB+ RAM
+      - key: EXECUTIONS_PROCESS
+        value: "main"
+
       - key: N8N_PORT
         value: "5678"
       
       - key: PORT
         value: "5678"
 
-      - key: N8N_HOST
+      - key: N8N_LISTEN_ADDRESS
         value: "0.0.0.0"
 
       - key: N8N_ENCRYPTION_KEY
-        generateValue: true
+        value: "n8n_iconic_skills_secret_key_2024_secure"
 
+      # Database Configuration for Neon
       - key: DB_TYPE
         value: postgresdb
 
-      # Parse from your Neon connection string
       - key: DB_POSTGRESDB_HOST
-        value:ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech  # YOUR HOST
+        value: ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech'
         
       - key: DB_POSTGRESDB_PORT
         value: "5432"
-        
+
       - key: DB_POSTGRESDB_DATABASE
-        value: neondb  # YOUR DATABASE NAME
-        
+        value: neondb
+
       - key: DB_POSTGRESDB_USER
-        value: neondb_owner  # YOUR USERNAME
-        
+        value: neondb_owner
+
       - key: DB_POSTGRESDB_PASSWORD
-        sync: false  # Set in Render dashboard: YOUR PASSWORD
+        value: pg_CvH1FRtMSg8V
 
       - key: DB_POSTGRESDB_SSL_ENABLED
         value: "true"
 
-      - key: N8N_WEBHOOK_URL
+      - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
+        value: "false"
+
+      - key: WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
