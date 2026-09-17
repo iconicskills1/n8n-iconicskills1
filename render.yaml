@@ -11,18 +11,31 @@ services:
     envVars:
       # CRITICAL: Fixes BOTH DNS IPv4 lookup AND Memory Limit (OOM Crash)
       - key: NODE_OPTIONS
-        value: "--dns-result-order=ipv4first --max-old-space-size=280 --max-semi-space-size=1"
+        value: "--dns-result-order=ipv4first --max-old-space-size=310"
 
       # Disable background telemetry that can hang startup
+      - key: N8N_COMMUNITY_PACKAGES_ENABLED
+        value: "false"
+
+      - key: N8N_VERSION_NOTIFICATIONS_ENABLED
+        value: "false"
+
+      - key: N8N_TEMPLATES_ENABLED
+        value: "false"
+
       - key: N8N_DIAGNOSTICS_ENABLED
         value: "false"
 
       - key: N8N_PERSONALIZATION_ENABLED
         value: "false"
 
+      - key: N8N_LOG_LEVEL
+        value: "warn"
+
+      # Deprecation fixes
       - key: N8N_RUNNERS_TASK_TIMEOUT
         value: "300"
-
+      
       - key: N8N_COMPRESSION_NODE_MAX_DECOMPRESSED_SIZE_BYTES
         value: "2147483648"
 
@@ -74,7 +87,7 @@ services:
         value: "false"
 
       - key: DB_POSTGRESDB_POOL_SIZE
-        value: "2"
+        value: "1"
 
       - key: WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
