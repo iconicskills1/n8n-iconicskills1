@@ -19,16 +19,27 @@ services:
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
 
-      # ONLY use DB_TYPE and DATABASE_URL
       - key: DB_TYPE
         value: postgresdb
 
-      - key: DATABASE_URL
-        sync: false  # Set in Render dashboard
+      # Parse from your Neon connection string
+      - key: DB_POSTGRESDB_HOST
+        value:ep-solitary-base-b4q36a3r-pooler.c-6.us-east-2.aws.neon.tech  # YOUR HOST
+        
+      - key: DB_POSTGRESDB_PORT
+        value: "5432"
+        
+      - key: DB_POSTGRESDB_DATABASE
+        value: neondb  # YOUR DATABASE NAME
+        
+      - key: DB_POSTGRESDB_USER
+        value: neondb_owner  # YOUR USERNAME
+        
+      - key: DB_POSTGRESDB_PASSWORD
+        sync: false  # Set in Render dashboard: YOUR PASSWORD
+
+      - key: DB_POSTGRESDB_SSL_ENABLED
+        value: "true"
 
       - key: N8N_WEBHOOK_URL
         value: https://n8n-iconicskills1.onrender.com/
-
-      # Optional: Disable SSL rejection if needed
-      - key: NODE_TLS_REJECT_UNAUTHORIZED
-        value: "0"
